@@ -1,0 +1,28 @@
+{% extends 'main.html' %} {% block content %}
+<h1 class="text-center mb-4">Home</h1>
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- Left Sidebar -->
+    <div class="col-md-3">
+      <div class="sticky-top">{% include 'base/topics_component.html' %}</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-6">
+      <div>{{ room_count }} rooms available</div>
+      <div class="text-left mb-4">
+        <a href="{% url 'create-room' %}" class="btn btn-primary"
+          >Create Room</a
+        >
+      </div>
+      <div class="list-group">{% include 'base/feed_component.html' %}</div>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="col-md-3">
+      <div class="sticky-top">{% include 'base/activity_component.html' %}</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+<h3>Recent Activity</h3>
+<hr />
+{% for msg in room_messages%}
+<div>
+  <small
+    ><a href="{% url 'profile' msg.user.id %}">{{msg.user}}</a> -
+    {{msg.created|timesince}}</small
+  >
+  <small>Replied to "{{msg.room}}"</small>
+
+  <!-- here if leave it as msg it will show def __str__ of the model, cool! -->
+  <p>{{msg}}</p>
+
+  <hr />
+</div>
+{% endfor %}

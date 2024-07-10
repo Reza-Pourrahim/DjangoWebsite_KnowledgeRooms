@@ -1,0 +1,24 @@
+{% for room in rooms %}
+<div class="list-group-item mb-3">
+  <div class="d-flex justify-content-between">
+    <div>
+      <h5>
+        {{ room.id }} -- <a href="{% url 'room' room.id %}">{{ room.name }}</a>
+      </h5>
+      <small>{{ room.topic.name }}</small>
+      <br />
+      <a href="{% url 'profile' room.host.id %}">@{{ room.host.username }}</a>
+    </div>
+    {% if request.user == room.host%}
+    <div>
+      <a href="{% url 'update-room' room.id %}" class="btn btn-secondary btn-sm"
+        >Edit</a
+      >
+      <a href="{% url 'delete-room' room.id %}" class="btn btn-danger btn-sm"
+        >Delete</a
+      >
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
