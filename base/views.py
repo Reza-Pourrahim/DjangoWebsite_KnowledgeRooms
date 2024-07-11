@@ -55,9 +55,10 @@ def registerPage(request):
 
 def logoutPage(request):
     logout(request)
-    return redirect("home")  # Redirect to home or desired page
+    return redirect("login")  # Redirect to login
 
 
+@login_required(login_url="login")
 def home(request):
     q = request.GET.get("q") if request.GET.get("q") != None else ""
 
@@ -107,8 +108,14 @@ def userProfile(request, pk):
     rooms = user.room_set.all()
     room_messages = user.message_set.all()
     topics = Topic.objects.all()
-    context={'user': user, 'rooms': rooms, 'room_messages': room_messages, 'topics': topics}
+    context = {
+        "user": user,
+        "rooms": rooms,
+        "room_messages": room_messages,
+        "topics": topics,
+    }
     return render(request, "base/profile.html", context)
+
 
 @login_required(login_url="login")
 def createRoom(request):

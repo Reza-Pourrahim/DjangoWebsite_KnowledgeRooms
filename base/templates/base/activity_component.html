@@ -1,16 +1,28 @@
-<h3>Recent Activity</h3>
-<hr />
-{% for msg in room_messages%}
-<div>
-  <small
-    ><a href="{% url 'profile' msg.user.id %}">{{msg.user}}</a> -
-    {{msg.created|timesince}}</small
-  >
-  <small>Replied to "{{msg.room}}"</small>
-
-  <!-- here if leave it as msg it will show def __str__ of the model, cool! -->
-  <p>{{msg}}</p>
-
-  <hr />
+<div class="card mb-4">
+  <div class="card-body">
+    <h3 class="card-title">Recent Activity</h3>
+    <hr />
+    {% for msg in room_messages %}
+    <div class="activity-item">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <small class="text-muted">
+            <a
+              href="{% url 'profile' msg.user.id %}"
+              class="text-decoration-none text-dark font-weight-bold"
+              >{{ msg.user }}</a
+            >
+            - {{ msg.created|timesince }}
+          </small>
+          <small class="text-muted d-block mb-1"
+            >Replied to "{{ msg.room }}"</small
+          >
+          <p class="mb-0">{{ msg.body }}</p>
+        </div>
+        <!-- Optionally, add icons or buttons for actions -->
+      </div>
+      <hr class="my-3" />
+    </div>
+    {% endfor %}
+  </div>
 </div>
-{% endfor %}

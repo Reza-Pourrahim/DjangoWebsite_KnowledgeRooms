@@ -9,7 +9,7 @@
       <br />
       <a href="{% url 'profile' room.host.id %}">@{{ room.host.username }}</a>
     </div>
-    {% if request.user == room.host%}
+    {% if request.user == room.host %}
     <div>
       <a href="{% url 'update-room' room.id %}" class="btn btn-secondary btn-sm"
         >Edit</a

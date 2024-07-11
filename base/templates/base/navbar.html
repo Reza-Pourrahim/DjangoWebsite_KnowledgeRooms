@@ -1,0 +1,72 @@
+<!-- Topbar -->
+<nav
+  class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+>
+  <!-- Sidebar Toggle (Topbar) -->
+  <button
+    id="sidebarToggleTop"
+    class="btn btn-link d-md-none rounded-circle mr-3"
+  >
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <!-- Search Form -->
+  <form class="form-inline">
+    <input
+      class="form-control mr-sm-2"
+      type="text"
+      name="q"
+      placeholder="Search Rooms"
+      aria-label="Search"
+    />
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+      Search
+    </button>
+  </form>
+
+  <!-- Topbar Navbar -->
+  <ul class="navbar-nav ml-auto">
+    <!-- Nav Item - User Information -->
+    {% if request.user.is_authenticated %}
+    <li class="nav-item dropdown no-arrow">
+      <a
+        class="nav-link dropdown-toggle user-dropdown-toggle"
+        href="#"
+        id="userDropdown"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <span class="mr-2 d-none d-lg-inline text-dark font-weight-bold medium">
+          <i class="fas fa-user-circle"></i> {{ request.user.username }}
+        </span>
+      </a>
+      <!-- Dropdown - User Information -->
+      <div
+        class="dropdown-menu dropdown-menu-right shadow animated--grow-in user-dropdown"
+        aria-labelledby="userDropdown"
+        style="z-index: 1500"
+      >
+        <a class="dropdown-item" href="{% url 'profile' request.user.pk %}">
+          <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{% url 'logout' %}">
+          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+          Logout
+        </a>
+      </div>
+    </li>
+    {% else %}
+    <!-- Nav Item - Login -->
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'login' %}">
+        <i class="fas fa-sign-in-alt"></i>
+        <span class="ml-2 d-none d-lg-inline text-gray-600">Login</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+<!-- End of Topbar -->

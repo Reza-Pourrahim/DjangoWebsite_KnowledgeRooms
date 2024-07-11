@@ -1,9 +1,29 @@
-<div>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-    <p>Haven't signed up yet?</p>
-    <a href="{% url 'register' %}">Sign Up</a>
+{% extends 'main.html' %} {% load static %} {% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card shadow-lg border-0 rounded-lg mt-5">
+        <div class="card-header">
+          <h3 class="text-center font-weight-light my-4">Login</h3>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %} {{ form.as_p }}
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-block">
+                Login
+              </button>
+            </div>
+          </form>
+          <div class="text-center mt-3">
+            <p>Haven't signed up yet?</p>
+            <a href="{% url 'register' %}" class="text-decoration-none"
+              >Sign Up</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+{% endblock %}

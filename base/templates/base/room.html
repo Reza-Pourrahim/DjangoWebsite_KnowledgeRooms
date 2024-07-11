@@ -1,45 +1,56 @@
-{% extends 'main.html' %}
-
-
-{% block content %}
-<div class="room-container">
-    <div>
-        <h1>{{room.name}}</h1>
-        <p>{{room.description}}</p>
+{% extends 'main.html' %} {% load static %} {% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="room-container">
+        <h1>{{ room.name }}</h1>
+        <p>{{ room.description }}</p>
 
         <div class="comment-wrapper">
-            <h3>Conversation</h3>
-            <hr>
+          <h3>Conversation</h3>
+          <hr />
+          <div>
+            {% for message in room_messages %}
             <div>
-                {% for message in room_messages %}
-                <div>
-                    {% if request.user == message.user %}
-                    <a href="{% url 'delete-message' message.id room.id%}">Delete</a>
-                    {% endif %}
-                    <small>@{{message.user}} {{message.created|timesince}} ago</small>
-                    <p>{{message.body}}</p>
-                </div>
-                <hr>
-                {% endfor%}
+              {% if request.user == message.user %}
+              <a href="{% url 'delete-message' message.id room.id %}">Delete</a>
+              {% endif %}
+              <small
+                >@{{ message.user.username }} {{ message.created|timesince }}
+                ago</small
+              >
+              <p>{{ message.body }}</p>
             </div>
+            <hr />
+            {% endfor %}
+          </div>
         </div>
 
         {% if request.user.is_authenticated %}
         <div class="comment-form">
-            <form method="POST" action="">
-                {% csrf_token %}
-                <input type="text" name="body" placeholder="write your massage here..." />
-            </form>
+          <form method="POST" action="">
+            {% csrf_token %}
+            <input
+              type="text"
+              name="body"
+              placeholder="Write your message here..."
+            />
+            <button type="submit" class="btn btn-primary">Post</button>
+          </form>
         </div>
         {% endif %}
+      </div>
     </div>
 
-    <div>
+    <div class="col-md-4">
+      <div class="participants-container">
         <h3>Participants</h3>
-        <hr>
-        {% for par in participants %}
-            <p>{{par.username}}</p>
+        <hr />
+        {% for participant in participants %}
+        <p>{{ participant.username }}</p>
         {% endfor %}
+      </div>
     </div>
+  </div>
 </div>
-{% endblock content %}
+{% endblock %}
